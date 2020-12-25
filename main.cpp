@@ -1,16 +1,17 @@
 #include <iostream>
+//#include <cmath>
 using namespace std;
 
-string cypher(int, string);
+string cypher(int);
 
 int main() {
 
-    string chars = "abcdefghijklmnopqrstuvwxyz";
     int key = 0;
     char discard;
     string message;
+    string alphaCypher;
 
-    cout << "Ceasar Cypher Key (1-25): ";
+    cout << "Ceasar Cypher Shift (key), (1-25): ";
     cin  >> key;
     cin.get(discard);
 
@@ -18,16 +19,22 @@ int main() {
     getline(cin, message);
 
     cout << "Your message in plaintext: " << message << endl;
-
-    cout << "Your Ceasar Cypher message: " << cypher(key, message) << endl;
+    cout << "Your Ceasar Cypher message: " << cypher(key) << endl;
 
     return 0;
 }
 
-string cypher(int key, int message) {
-    string cyphertext;
+string cypher(int key) {
+//    string cyphertext;
+    string alpha = "abcdefghijklmnopqrstuvwxyz";
+    string cypherAlpha = "abcdefghijklmnopqrstuvwxyz";
 
-
-
-    return cyphertext;
+    for (int i = 0; i < alpha.size(); i++) {
+        if (i + key >= alpha.size()) {
+            cypherAlpha[i] = alpha[--key];
+        } else {
+            cypherAlpha[i] = alpha[i + key];
+        }
+    }
+    return cypherAlpha;
 }
