@@ -1,1 +1,2 @@
-# Julius Ceasar's substitution cipher.  
+# Julius Ceasar's substitution cipher
+### Presently compatible with lowercase roman alphabet letters.
