@@ -1,2 +1,1 @@
-# ceasar-cipher
-#### Julius Ceasar's substitution cipher.  
+# Julius Ceasar's substitution cipher.  
