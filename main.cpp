@@ -11,8 +11,9 @@ int main() {
     string message, cipherAlphabet, cipherText, alpha = "abcdefghijklmnopqrstuvwxyz";
 
     cout << "\nJulius Ceasar's Substitution Cipher!"
-            "\nEnter an integer to shift the normal alphabet by that number of positions." << endl;
-    cout << "Then, enter a message to encrypt using your cipher alphabet." << endl;
+            "\nEnter an integer to shift the normal alphabet [left] by that number of positions." << endl;
+    cout << "Then, enter a message that will be encrypted using your cipher alphabet." << endl;
+    cout << "https://en.wikipedia.org/wiki/Caesar_cipher" << endl;
 
     // input number of letters to shift
     cout << "\nEnter the Ceasar Shift Cipher key? (integer, 1-25): ";
@@ -38,7 +39,7 @@ int main() {
     cout << "\nPlaintext message: " << message << endl;
     cout << "Normal alphabet: " << alpha << "." << endl;
     cout << "Cipher alphabet: " << cipherAlphabet << ". Shifted [" << key << "] place(s) to the left." << endl;
-    cout << "Ceasar Shift Cipher message: " << cipherText << endl;
+    cout << "Ceasar Shift Cipher message: " << cipherText << endl << endl;
 
     return 0;
 }
