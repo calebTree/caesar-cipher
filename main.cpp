@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
 
-void encryption();
-void decryption();
-string cipherAlpha(int, string);
-string cipherMessage(string, string, string);
-string decrypt(string, string, int);
+void encryption(string, char);                  // encryption option
+void decryption(string, char);                  // decryption option
+string cipherAlpha(int, string);                // generate cipher alphabet
+string cipherMessage(string, string, string);   // encrypt the message
+string decrypt(string, string, int);            // decrypt the message
 
 int main() {
     cout << "\nWelcome to Julius Ceasar's Shift Cipher!"
@@ -14,6 +14,8 @@ int main() {
     cout << "https://en.wikipedia.org/wiki/Caesar_cipher\n" << endl;
 
     int option;
+    string plainAlpha = "abcdefghijklmnopqrstuvwxyz";
+    char discard;
 
     while (option != 0) {
         cout << "(1) Encrypt, (2) Decrypt, (0) Quit: ";
@@ -22,22 +24,21 @@ int main() {
             case 0:
                 break;
             case 1:
-                encryption();
+                encryption(plainAlpha, discard);
                 break;
             case 2:
-                decryption();
+                decryption(plainAlpha, discard);
                 break;
         }
     }
 
     return 0;
 }
-void encryption() {
+void encryption(string plainAlpha, char discard) {
     int key = 0;
-    char discard;
-    string message, cipherAlphabet, cipherText, plainAlpha = "abcdefghijklmnopqrstuvwxyz";
+    string message, cipherAlphabet, cipherText;
 
-    // input number of letters to shift
+    // input number of places to shift left
     cout << "Enter your chosen cipher key. (integer, 1-25): ";
     cin >> key;
     // input validation
@@ -62,11 +63,9 @@ void encryption() {
     cout << "Ciphertext: " << cipherText << endl << endl;
 }
 
-void decryption() {
+void decryption(string plainAlpha, char discard) {
     int key = 0;
-    char discard;
     string cipherText;
-    string plainAlpha = "abcdefghijklmnopqrstuvwxyz";
 
     cout << "Enter the known cipher key. (integer, 1-25): ";
     cin >> key;
@@ -80,6 +79,7 @@ void decryption() {
     cin.get(discard); // discard \n
     cout << "Enter the message to decrypt. (lowercase, roman alpha): "; // input message to decrypt
     getline(cin, cipherText);
+
     cout << "\nCiphertext: " << cipherText << endl;
     cout << "Plain alphabet:  " << plainAlpha << "." << endl;
     cout << "Cipher alphabet: " << cipherAlpha(key, plainAlpha) << "; Shifted [" << key << "] place(s) to the left." << endl;
@@ -87,26 +87,26 @@ void decryption() {
     cout << "Plaintext: " << decrypt(cipherText, plainAlpha, key) << endl << endl;
 }
 
-string cipherAlpha(int key, string alpha) {
-    string cypherAlpha = alpha; // cypherAlpha same size as alpha
+string cipherAlpha(int key, string plainAlpha) {
+    string cipherAlpha = plainAlpha; // cypherAlpha same size as plainAlpha
     int p = 0; // wrap around variable
-    for (int i = 0; i < alpha.size(); i++) {
-        if (i + key >= alpha.size()) {
-            cypherAlpha[i] = alpha[p];
+    for (int i = 0; i < plainAlpha.size(); i++) {
+        if (i + key >= plainAlpha.size()) { // wrap around when i + key >= 26
+            cipherAlpha[i] = plainAlpha[p]; // shift cipherAlpha
             p++;
         } else {
-            cypherAlpha[i] = alpha[i + key];
+            cipherAlpha[i] = plainAlpha[i + key]; // shift cipherAlpha
         }
     }
-    return cypherAlpha;
+    return cipherAlpha;
 }
 
 string cipherMessage(string cipherAlpha, string plainAlpha, string message) {
     string cipherText = message; // cipherText same size as message
-    for (int i = 0; i < plainAlpha.size(); i++) {
-        for (int j = 0; j < message.size(); j++) {
+    for (int i = 0; i < cipherAlpha.size(); i++) { // loop over all letters in the alphabet
+        for (int j = 0; j < message.size(); j++) { // loop over all letters in the message
             if (plainAlpha[i] == message[j])
-                cipherText[j] = cipherAlpha[i];
+                cipherText[j] = cipherAlpha[i]; // replace each plainAlpha letter in the message with the cipherAlpha letter
         }
     }
     return cipherText;
@@ -114,11 +114,11 @@ string cipherMessage(string cipherAlpha, string plainAlpha, string message) {
 
 string decrypt(string cipherText, string plainAlpha, int key) {
     string plainText = cipherText; // plainText same size as cipherText
-    string cipherAlphabet = cipherAlpha(key, plainAlpha);
-    for (int i = 0; i < cipherAlphabet.size(); i++) {
-        for (int j = 0; j < cipherText.size(); j++) {
+    string cipherAlphabet = cipherAlpha(key, plainAlpha); // generate cipherAlphabet
+    for (int i = 0; i < cipherAlphabet.size(); i++) { // loop over all letters in alphabet
+        for (int j = 0; j < cipherText.size(); j++) { // loop over all letters in the cipherText
             if (cipherAlphabet[i] == cipherText[j])
-                plainText[j] = plainAlpha[i];
+                plainText[j] = plainAlpha[i]; // replace each cipherAlpha letter in the message with the plainAlpha letter
         }
     }
     return plainText;
