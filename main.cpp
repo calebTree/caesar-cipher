@@ -10,26 +10,35 @@ int main() {
     char discard;
     string message, cypherAlpha, cipherText, alpha = "abcdefghijklmnopqrstuvwxyz";
 
-    cout << "Ceasar Shift Cipher key? (0-25): ";
+    cout << "\nJulius Ceasar's Substitution Cipher!"
+            "\nEnter an integer to shift the normal alphabet by that number of positions." << endl;
+    cout << "Then, enter a message to encrypt using your cypher alphabet." << endl;
+
+    // input number of letters to shift
+    cout << "\nEnter the Ceasar Shift Cipher key? (integer, 1-25): ";
     cin >> key;
-    if (key > 25) {
-        while(key > 25 || key < 0) {
-            cout << "Error! Enter an integer between 0 and 25: ";
+
+    // input validation
+    if (key > 25 || key < 1) {
+        while(key > 25 || key < 1) {
+            cout << "Error! Enter an integer between 1 and 25: ";
             cin >> key;
         }
     }
     cin.get(discard); // discard \n
 
-    cout << "Message: ";
+    cout << "Enter the message to encrypt. (lowercase, roman alpha): "; // input message to encrypt
     getline(cin, message);
 
-    cypherAlpha = cipherAlpha(key, alpha); // shift alphabet [key] letters to the left
-    cipherText = cipherMessage(cypherAlpha, alpha, message); // encrypt the message with the cipher alphabet
+    // shift alphabet [key] letters to the left
+    cypherAlpha = cipherAlpha(key, alpha);
+    // encrypt the message using the cipher alphabet
+    cipherText = cipherMessage(cypherAlpha, alpha, message);
 
-    cout << "Plaintext message: " << message << endl;
-    cout << "Normal alphabet: " << alpha << endl;
-    cout << "Cipher alphabet: " << cypherAlpha << endl;
-    cout << "Ceasar Cipher message: " << cipherText << endl;
+    cout << "\nPlaintext message: " << message << endl;
+    cout << "Normal alphabet: " << alpha << "." << endl;
+    cout << "Cipher alphabet: " << cypherAlpha << ". Shifted [" << key << "] place(s) to the left." << endl;
+    cout << "Ceasar Shift Cipher message: " << cipherText << endl;
 
     return 0;
 }
