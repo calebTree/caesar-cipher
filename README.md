@@ -1,5 +1,5 @@
 # Julius Ceasar's Substitution Cipher!
-Enter an integer (key) to shift the normal alphabet by that number of positions.  
+Enter an integer (key) to left shift the normal alphabet by that number of positions.  
 Then, enter a message to encrypt using your new cipher alphabet.  
 🔥 FYI a key of 13 is effectively ROT-13.  
   
