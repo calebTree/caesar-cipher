@@ -8,7 +8,7 @@ int main() {
 
     int key = 0;
     char discard;
-    string message, cypherAlpha, cipherText, alpha = "abcdefghijklmnopqrstuvwxyz";
+    string message, cipherAlphabet, cipherText, alpha = "abcdefghijklmnopqrstuvwxyz";
 
     cout << "\nJulius Ceasar's Substitution Cipher!"
             "\nEnter an integer to shift the normal alphabet by that number of positions." << endl;
@@ -31,13 +31,13 @@ int main() {
     getline(cin, message);
 
     // shift alphabet [key] letters to the left
-    cypherAlpha = cipherAlpha(key, alpha);
+    cipherAlphabet = cipherAlpha(key, alpha);
     // encrypt the message using the cipher alphabet
-    cipherText = cipherMessage(cypherAlpha, alpha, message);
+    cipherText = cipherMessage(cipherAlphabet, alpha, message);
 
     cout << "\nPlaintext message: " << message << endl;
     cout << "Normal alphabet: " << alpha << "." << endl;
-    cout << "Cipher alphabet: " << cypherAlpha << ". Shifted [" << key << "] place(s) to the left." << endl;
+    cout << "Cipher alphabet: " << cipherAlphabet << ". Shifted [" << key << "] place(s) to the left." << endl;
     cout << "Ceasar Shift Cipher message: " << cipherText << endl;
 
     return 0;
