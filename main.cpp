@@ -12,7 +12,7 @@ int main() {
 
     cout << "\nJulius Ceasar's Substitution Cipher!"
             "\nEnter an integer to shift the normal alphabet by that number of positions." << endl;
-    cout << "Then, enter a message to encrypt using your cypher alphabet." << endl;
+    cout << "Then, enter a message to encrypt using your cipher alphabet." << endl;
 
     // input number of letters to shift
     cout << "\nEnter the Ceasar Shift Cipher key? (integer, 1-25): ";
