@@ -1,8 +1,6 @@
-//
-// Created by caleb on 5/5/2021.
-//
 #include "ceasar-cipher.h"
 #include <iostream>
+
 using namespace std;
 
 void encryption(const string &plainAlpha, char &discard) {
