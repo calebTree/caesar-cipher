@@ -1,5 +1,8 @@
-#include "ceasar-cipher.h"
+#include "caesar-cipher.h"
 #include <iostream>
+
+// https://www.tutorialspoint.com/cplusplus-program-to-implement-caesar-cypher
+// https://www.asciihex.com/
 
 using namespace std;
 
@@ -24,7 +27,7 @@ void encryption(const string &plainAlpha, char &discard) {
     // shift alphabet [key] letters to the left
     cipherAlphabet = cipherAlpha(key, plainAlpha);
     // encrypt the message using the cipher alphabet
-    cipherText = cipherMessage(cipherAlphabet, plainAlpha, message);
+    cipherText = cipherMessage(message, key);
 
     cout << "\nPlaintext: " << message << endl;
     cout << "Plain alphabet:  " << plainAlpha << "." << endl;
@@ -53,42 +56,43 @@ void decryption(const string &plainAlpha, char &discard) {
     cout << "Plain alphabet:  " << plainAlpha << "." << endl;
     cout << "Cipher alphabet: " << cipherAlpha(key, plainAlpha) << "; Shifted [" << key << "] place(s) to the left." << endl;
     // display decrypted message
-    cout << "Plaintext: " << decrypt(cipherText, plainAlpha, key) << endl << endl;
+    cout << "Plaintext: " << decrypt(cipherText, key) << endl << endl;
 }
 
 string cipherAlpha(int &key, const string &plainAlpha) {
-    string cipherAlpha = plainAlpha;                // cypherAlpha same size as plainAlpha
-    int p = 0;                                      // wrap around variable
-    for (int i = 0; i < plainAlpha.size(); i++) {
-        if (i + key >= plainAlpha.size()) {         // wrap around when i + key >= 26
-            cipherAlpha[i] = plainAlpha[p];         // shift cipherAlpha
-            p++;
-        } else {
-            cipherAlpha[i] = plainAlpha[i + key];   // shift cipherAlpha
-        }
+    string cipherAlpha;
+    for (char c : plainAlpha) {
+        cipherAlpha += static_cast<char>((c + key - 65) % 26 + 65);
     }
     return cipherAlpha;
 }
 
-string cipherMessage(const string &cipherAlpha, const string &plainAlpha, const string &message) {
-    string cipherText = message;                        // cipherText same size as message
-    for (int i = 0; i < cipherAlpha.size(); i++) {      // loop over all letters in the alphabet
-        for (int j = 0; j < message.size(); j++) {      // loop over all letters in the message
-            if (plainAlpha[i] == message[j])
-                cipherText[j] = cipherAlpha[i];         // replace each plainAlpha letter in the message with the cipherAlpha letter
-        }
+string cipherMessage(const string &message, int &key) {
+    string cipherText;
+    for (char c : message) {
+        if (c >= 65 && c <= 122)
+            if (isupper(c)) {
+                cipherText += static_cast<char>((c + key - 65) % 26 + 65);
+            } else {
+                cipherText += static_cast<char>((c + key - 97) % 26 + 97);
+            }
+        else
+            cipherText += c;
     }
     return cipherText;
 }
 
-string decrypt(const string &cipherText, const string &plainAlpha, int &key) {
-    string plainText = cipherText;                                  // plainText same size as cipherText
-    string cipherAlphabet = cipherAlpha(key, plainAlpha);       // generate cipherAlphabet
-    for (int i = 0; i < cipherAlphabet.size(); i++) {               // loop over all letters in alphabet
-        for (int j = 0; j < cipherText.size(); j++) {               // loop over all letters in the cipherText
-            if (cipherAlphabet[i] == cipherText[j])
-                plainText[j] = plainAlpha[i];                       // replace each cipherAlpha letter in the message with the plainAlpha letter
-        }
+string decrypt(const string &cipherText, int &key) {
+    string plainText;
+    for (char c : cipherText) {
+        if (c >= 65 && c <= 122)
+            if (isupper(c)) {
+                plainText += static_cast<char>((c - key - 65 % 26 + 26) % 26 + 65);
+            } else {
+                plainText += static_cast<char>((c - key - 97 % 26 + 26) % 26 + 97);
+            }
+        else
+            plainText += c;
     }
     return plainText;
 }
