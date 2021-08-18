@@ -1,12 +1,11 @@
 #include "caesar-cipher.h"
-#include <iostream>
 
 // https://www.tutorialspoint.com/cplusplus-program-to-implement-caesar-cypher
 // https://www.asciihex.com/
 
 using namespace std;
 
-void encryption(const string &plainAlpha, char &discard) {
+void encryption(const string &plainAlpha) {
     int key;
     string message, cipherAlphabet, cipherText;
 
@@ -14,14 +13,14 @@ void encryption(const string &plainAlpha, char &discard) {
     cout << "Enter your chosen cipher key. (integer, 1-25): ";
     cin >> key;
     // input validation
-    if (key > 25 || key < 1) {
-        while (key > 25 || key < 1) {
-            cout << "Error! Enter an integer between 1 and 25: ";
-            cin >> key;
-        }
+    while (!cin || key > 25 || key < 1) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Error! Enter an integer between 1 and 25: ";
+        cin >> key;
     }
-    cin.get(discard);                                                   // discard \n
-    cout << "Enter the message to encrypt. (lowercase, roman alpha): ";     // input message to encrypt
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');     // discard \n
+    cout << "Enter the message to encrypt: ";     // input message to encrypt
     getline(cin, message);
 
     // shift alphabet [key] letters to the left
@@ -35,21 +34,21 @@ void encryption(const string &plainAlpha, char &discard) {
     cout << "Ciphertext: " << cipherText << endl << endl;
 }
 
-void decryption(const string &plainAlpha, char &discard) {
+void decryption(const string &plainAlpha) {
     int key;
     string cipherText;
 
-    cout << "Enter the known cipher key. (integer, 1-25): ";
+    cout << "Enter your known cipher key. (integer, 1-25): ";
     cin >> key;
     // input validation
-    if (key > 25 || key < 1) {
-        while (key > 25 || key < 1) {
-            cout << "Error! Enter an integer between 1 and 25: ";
-            cin >> key;
-        }
+    while (!cin || key > 25 || key < 1) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Error! Enter an integer between 1 and 25: ";
+        cin >> key;
     }
-    cin.get(discard);                                                   // discard \n
-    cout << "Enter the message to decrypt. (lowercase, roman alpha): ";     // input message to decrypt
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');                // discard \n
+    cout << "Enter the message to decrypt: ";     // input message to decrypt
     getline(cin, cipherText);
 
     cout << "\nCiphertext: " << cipherText << endl;

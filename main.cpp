@@ -6,28 +6,34 @@ using namespace std;
 int main() {
     cout << "\nWelcome to Julius Caesar's Shift Cipher!"
             "\nEnter an integer to shift the normal alphabet left by that number of positions." << endl;
-    cout << "Then, enter a message that will be encrypted using your cipher alphabet." << endl;
+    cout << "Then, enter a message that will be encrypted using the generated cipher alphabet." << endl;
     cout << "https://en.wikipedia.org/wiki/Caesar_cipher\n" << endl;
 
-    int option = -1;
+    int option;
     string plainAlpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    char discard;
 
-    while (option != 0) {
+    while (cin) {
         cout << "(1) Encrypt, (2) Decrypt, (0) Quit: ";
         cin >> option;
+        if (!cin) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Error! Invalid input." << endl;
+            continue;
+        }
         switch (option) {
             case 0:
-                break;
+                return 0;
             case 1:
-                encryption(plainAlpha, discard);
+                encryption(plainAlpha);
                 break;
             case 2:
-                decryption(plainAlpha, discard);
+                decryption(plainAlpha);
                 break;
             default:
-                cout << "Invalid choice." << endl;
+                cout << "Error! Invalid choice." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
-    return 0;
 }
