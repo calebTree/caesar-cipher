@@ -1,7 +1,4 @@
-#include <iostream>
 #include "caesar-cipher.h"
-
-using namespace std;
 
 int main() {
     cout << "\nWelcome to Julius Caesar's Shift Cipher!"

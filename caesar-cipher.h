@@ -1,10 +1,8 @@
 #ifndef CAESAR_CIPHER_CAESAR_CIPHER_H
 #define CAESAR_CIPHER_CAESAR_CIPHER_H
 
-#endif //CAESAR_CIPHER_CAESAR_CIPHER_H
-
 #include <iostream>
-#include<limits>
+#include <limits>
 
 using namespace std;
 
@@ -27,3 +25,5 @@ string cipherMessage(const string&, int&);
 string decrypt(const string&, int&);
 // Function to decrypt the message.
 // Postcondition: const string is ciphertext shifted back by int positions.
+
+#endif //CAESAR_CIPHER_CAESAR_CIPHER_H

@@ -1,7 +1,5 @@
 #include "caesar-cipher.h"
 
-using namespace std;
-
 void encryption(const string &plainAlpha) {
     int key;
     string message, cipherAlphabet, cipherText;
