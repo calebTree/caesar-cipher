@@ -12,10 +12,10 @@ int main() {
     int option;
     string plainAlpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    while (cin) {
+    for(;;) {
         cout << "(1) Encrypt, (2) Decrypt, (0) Quit: ";
         cin >> option;
-        if (!cin) {
+        if (cin.fail()) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Error! Invalid input." << endl;

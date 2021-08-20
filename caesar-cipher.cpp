@@ -1,8 +1,5 @@
 #include "caesar-cipher.h"
 
-// https://www.tutorialspoint.com/cplusplus-program-to-implement-caesar-cypher
-// https://www.asciihex.com/
-
 using namespace std;
 
 void encryption(const string &plainAlpha) {
@@ -20,7 +17,7 @@ void encryption(const string &plainAlpha) {
         cin >> key;
     }
     cin.ignore(numeric_limits<streamsize>::max(), '\n');     // discard \n
-    cout << "Enter the message to encrypt: ";     // input message to encrypt
+    cout << "Enter the message to encrypt: ";                       // input message to encrypt
     getline(cin, message);
 
     // shift alphabet [key] letters to the left
