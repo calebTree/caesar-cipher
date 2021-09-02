@@ -25,7 +25,10 @@ void encryption(const string &plainAlpha) {
 
     cout << "\nPlaintext: " << message << endl;
     cout << "Plain alphabet:  " << plainAlpha << "." << endl;
-    cout << "Cipher alphabet: " << cipherAlphabet << "; Shifted [" << key << "] place(s) to the left." << endl;
+    if (key == 13)
+        cout << "Cipher alphabet: " << cipherAlphabet << "; In ROT13." << endl;
+    else
+        cout << "Cipher alphabet: " << cipherAlphabet << "; Shifted [" << key << "] place(s) to the left." << endl;
     cout << "Ciphertext: " << cipherText << endl << endl;
 }
 
@@ -48,7 +51,10 @@ void decryption(const string &plainAlpha) {
 
     cout << "\nCiphertext: " << cipherText << endl;
     cout << "Plain alphabet:  " << plainAlpha << "." << endl;
-    cout << "Cipher alphabet: " << cipherAlpha(key, plainAlpha) << "; Shifted [" << key << "] place(s) to the left." << endl;
+    if (key == 13)
+        cout << "Cipher alphabet: " << cipherAlpha(key, plainAlpha) << "; In ROT13." << endl;
+    else
+        cout << "Cipher alphabet: " << cipherAlpha(key, plainAlpha) << "; Shifted [" << key << "] place(s) to the left." << endl;
     // display decrypted message
     cout << "Plaintext: " << decrypt(cipherText, key) << endl << endl;
 }
@@ -64,7 +70,7 @@ string cipherAlpha(int &key, const string &plainAlpha) {
 string cipherMessage(const string &message, int &key) {
     string cipherText;
     for (char c : message) {
-        if (c >= 65 && c <= 122)
+        if (c >= 65 && c <= 90 || c >= 97 && c <= 122)
             if (isupper(c)) {
                 cipherText += static_cast<char>((c + key - 65) % 26 + 65);
             } else {
@@ -79,7 +85,7 @@ string cipherMessage(const string &message, int &key) {
 string decrypt(const string &cipherText, int &key) {
     string plainText;
     for (char c : cipherText) {
-        if (c >= 65 && c <= 122)
+        if (c >= 65 && c <= 90 || c >= 97 && c <= 122)
             if (isupper(c)) {
                 plainText += static_cast<char>((c - key - 65 % 26 + 26) % 26 + 65);
             } else {
